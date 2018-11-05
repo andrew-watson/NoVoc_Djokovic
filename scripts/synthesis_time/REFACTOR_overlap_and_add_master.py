@@ -8,7 +8,7 @@ import itertools
 import os
 import scipy.io.wavfile as wf
 import scipy.signal
-import binary_io
+#import binary_io
 
 parser = argparse.ArgumentParser(
     description='Overlap and Add')
@@ -221,8 +221,8 @@ class Overlap_Add():
     def open_binary_file(self, file_name, dimensionality):
         mgcfile = open(file_name, 'rb')
         contents = numpy.fromfile(mgcfile, dtype=numpy.float32)
-        mgfile.close()
-        assert contents.szie % float(dimensionality) == 0.0,'specified dimension %s not compatible with data'%(dimensionality)
+        mgcfile.close()
+        assert contents.size % float(dimensionality) == 0.0,'specified dimension %s not compatible with data'%(dimensionality)
         contents = contents[:(dimensionality * (contents.size / dimensionality))]
         contents = contents.reshape((-1, dimensionality))
         return contents
