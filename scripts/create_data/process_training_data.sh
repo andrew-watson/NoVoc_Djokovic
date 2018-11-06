@@ -25,6 +25,10 @@ echo "Creating pitchmark files with REAPER"
 
 cd ..
 
+if [ ! -d ./pm ]; then
+	mkdir ./pm
+fi
+
 for file in ./downsampled_wavs/*.wav ; do
   #Pass file to REAPER
   bare=$(basename $file) #NEED BETTER WAY OF DOING THIS
@@ -36,6 +40,10 @@ done
 #Create mgcs for every downsampled wav with pm file. Also takes duration as input
 
 echo "Creating mgcs"
+
+if [ ! -d ./mgc ]; then
+	mkdir ./mgc
+fi
 
 for file in ./downsampled_wavs/*.wav ; do
   bare=$(basename $file)
