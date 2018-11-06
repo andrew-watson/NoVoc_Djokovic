@@ -38,8 +38,8 @@ class Overlap_Add():
 
         prev_frame = []
         prev_peak = 0
-
         frames = self.read_bin_file(str(input)+".mgc")
+        
         print "Reading frames"
         if args.preemphasis == True:
             print "Preemphasis data used - will apply compensation filter"
@@ -154,6 +154,7 @@ class Overlap_Add():
                         hypothesis = self.hypothesis(self.master, prev_peak, this_peak)
                         print "Update     = ", hypothesis
                         #if hypothesis
+                        
                     print "Hypothesis is now True"
                     ##NOW ADD NEW FRAME
                     ##CALCULATE DISTANCES AND POSITIONS##
@@ -220,7 +221,7 @@ class Overlap_Add():
 
     def open_binary_file(self, file_name, dimensionality):
         mgcfile = open(file_name, 'rb')
-        contents = numpy.fromfile(mgcfile, dtype=numpy.float32)
+        contents = np.fromfile(mgcfile, dtype=np.float32)
         mgcfile.close()
         assert contents.size % float(dimensionality) == 0.0,'specified dimension %s not compatible with data'%(dimensionality)
         contents = contents[:(dimensionality * (contents.size / dimensionality))]

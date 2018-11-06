@@ -30,8 +30,8 @@ if [ ! -d ./pm ]; then
 fi
 
 for file in ./downsampled_wavs/*.wav ; do
-  #Pass file to REAPER
-  bare=$(basename $file) #NEED BETTER WAY OF DOING THIS
+  #Pass wav files to REAPER to extract pitchmarks
+  bare=$(basename ${file%.*}) 
   echo $bare
   reaper -i $file -p ./pm/$bare.pm -a
 done
@@ -46,7 +46,7 @@ if [ ! -d ./mgc ]; then
 fi
 
 for file in ./downsampled_wavs/*.wav ; do
-  bare=$(basename $file)
+  bare=$(basename ${file%.*})
   echo $bare
   dur="$(sox --i -D $file)"
 

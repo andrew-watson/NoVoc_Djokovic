@@ -21,9 +21,9 @@ parser.add_argument('--input', '-i', help="Pitchmark file")
 parser.add_argument('--wav_reference', '-w', help="Reference Wav file")
 parser.add_argument('--duration', '-d', help="Duration of wav file")
 parser.add_argument('--preemphasis', '-p', action='store_true', help="Add a preemphasis filter. Set to coeff=0.95")
-parser.add_argument('--logstretch', '-l', action='store_true', help='Encodes the scaled log of the stretch factor - (multiplied by 20)')
-parser.add_argument('--filter', '-f', nargs='*', help='Select a filter - lowpass, highpass, bandpass and values')
-parser.add_argument('--samplerate', '-s', default=16000)
+parser.add_argument('--logstretch', '-l', action='store_true', help="Encodes the scaled log of the stretch factor - (multiplied by 20). Default is no transform.")
+parser.add_argument('--filter', '-f', nargs='*', help="Select a filter - lowpass, highpass, or bandpass and two values. Default is none.")
+parser.add_argument('--samplerate', '-s', default=16000, help="Expected samplerate of wav files. Expected/recommended is 16000hz.")
 
 args = parser.parse_args()
 #####################################################
@@ -151,8 +151,8 @@ class Proc():
         print "Saving ......................"
         name = self.naming_convention(self.bare)
 
-        #To txt file for debugging#
-        numpy.savetxt("./mgc/"+str(name)+".txt", master)
+        #Optional save to txt file for debugging - need debug/verbose mode#
+        #numpy.savetxt("./mgc/"+str(name)+".txt", master)
         #To binary file - mgc - for training DNN#
         self.array_to_binary_file(master, "./mgc/"+str(name)+".mgc")
         print "================================================================"
