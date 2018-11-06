@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Run from NoVoc_Djokovic
+#Run from /NoVoc_Djokovic directory
 
 
 #Downsampling to 16000
@@ -14,9 +14,9 @@ fi
 cd ./wav
 
 for file in ./*.wav ; do
-  bare=${file:2:-4}
+  bare=$(basename $file)
   echo $bare
-  sox ./$file -r 16000 ../downsampled_wavs/$bare.wav
+  sox ./$file -r 16000 ../downsampled_wavs/$bare
 done
 
 #Create pitchmark files
@@ -27,17 +27,18 @@ cd ..
 
 for file in ./downsampled_wavs/*.wav ; do
   #Pass file to REAPER
-  bare=${file:19:-4}
+  bare=$(basename $file) #NEED BETTER WAY OF DOING THIS
   echo $bare
-  ~/Documents/REAPER/build/reaper -i $file -p ./pm/$bare.pm -a
+  reaper -i $file -p ./pm/$bare.pm -a
 done
+
 
 #Create mgcs for every downsampled wav with pm file. Also takes duration as input
 
 echo "Creating mgcs"
 
 for file in ./downsampled_wavs/*.wav ; do
-  bare=${file:19:-4}
+  bare=$(basename $file)
   echo $bare
   dur="$(sox --i -D $file)"
 
