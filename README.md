@@ -1,4 +1,4 @@
-# NoVoc Djokovic - raw waveform 
+# NoVoc Djokovic - raw waveform speech synthesis data preparation
 
 ## What?
 
@@ -10,7 +10,9 @@ In this repository are the scripts for creating the training data to pass to a n
 
 For this project, I used CSTR's Neural Network based Speech Synthesis System (https://github.com/CSTR-Edinburgh/merlin/).
 
-## How to run
+# How to run
+
+## Data Preparation
 
 First, you will need the following command line tools:
 
@@ -33,6 +35,7 @@ This runs the following steps:
 * Resamples each segment so they are frames of equal length to pass to the neural network. A stretch factor is also appended as a feature to be able to resample to the correct size at synthesis time.
 * Saves a (binary) .mgc file for each audio file, containing all extracted frames. .mgc is used as this is an extension Merlin expects for training data.
 
+## Synthesis time
 
 To produce the resultant audio file from the generated waveform frames at synthesis time, the following script performs an overlap and add to concatenate the frames together into speech.
 
